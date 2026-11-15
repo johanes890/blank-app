@@ -19,7 +19,6 @@ st.iframe(
     height=100,)
 import pandas as pd
 import streamlit as st
-
 DataFrame(
     {
         "widgets": [

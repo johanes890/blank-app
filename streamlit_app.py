@@ -2,7 +2,7 @@ import streamlit as st
 import time
 
 @st.fragment
-def release_the_balloons():
+def silahkan_masuk():
     st.button("Release the balloons", help="Fragment rerun")
     st.balloons()
 

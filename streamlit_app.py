@@ -17,7 +17,10 @@ st.iframe(
     <p>This is <strong>kalau tidakmua masuk pulang saja karana web ini tidak ada pintunya</strong>.</p>
     ''',
     height=100,)
-DataFrame(
+import pandas as pd
+import streamlit as st
+
+data_df = pd.DataFrame(
     {
         "widgets": [
             "st.selectbox",

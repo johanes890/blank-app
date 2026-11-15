@@ -3,7 +3,7 @@ import time
 
 @st.fragment
 def silahkan_masuk():
-    st.button("Release the balloons", help="Fragment rerun")
+    st.button("silahkan_masuk", help="Fragment rerun")
     st.balloons()
 
 with st.spinner("Inflating balloons..."):

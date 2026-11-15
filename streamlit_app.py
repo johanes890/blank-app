@@ -17,3 +17,27 @@ st.iframe(
     <p>This is <strong>kalau tidakmua masuk pulang saja karana web ini tidak ada pintunya</strong>.</p>
     ''',
     height=100,)
+data_df = pd.DataFrame(
+    {
+        "widgets": [
+            "st.selectbox",
+            "st.number_input",
+            "st.text_area",
+            "st.button",
+        ],
+    }
+)
+
+st.data_editor(
+    data_df,
+    column_config={
+        "widgets": st.column_config.Column(
+            "Streamlit Widgets",
+            help="Streamlit **widget** commands 🎈",
+            width="medium",
+            required=True,
+        )
+    },
+    hide_index=True,
+    num_rows="dynamic",
+)

@@ -8,5 +8,5 @@ def silahkan_masuk():
 
 with st.spinner("Inflating balloons..."):
     time.sleep(5)
-release_the_balloons()
+silahkan_masuk()
 st.button("Inflate more balloons", help="Full rerun")

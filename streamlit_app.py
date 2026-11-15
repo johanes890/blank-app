@@ -31,7 +31,7 @@ data_df = pd.DataFrame(
     }
 )
 
-st.data_editor(
+st.data_editor
     data_df,
     column_config={
         "widgets": st.column_config.Column(
@@ -42,7 +42,7 @@ st.data_editor(
         )
     },)
     
-    (
+    
     {
         "widgets": [
             "ikan besar",

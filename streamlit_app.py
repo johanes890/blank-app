@@ -1,7 +1,6 @@
 import datetime
 import os
 
-# Database produk sederhana (Kode: [Nama Barang, Harga])
 PRODUK_DB: dict[str, tuple[str, int]] = {
     "001": ("Beras Ramos 5kg", 72000),
     "002": ("Minyak Goreng 2L", 35000),

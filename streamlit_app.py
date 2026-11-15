@@ -1,6 +1,89 @@
-import streamlit as st
+from flask import Flask, render_template, request, redirect, url_for
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+app = Flask(__name__)
+
+# Daftar barang di minimarket (Bisa ditambah atau diubah sesuai kebutuhan)
+produk_minimarket = {
+    "BRG01": {"nama": "Beras Ramos 5kg", "harga": 68000},
+    "BRG02": {"nama": "Minyak Goreng 2L", "harga": 35000},
+    "BRG03": {"nama": "Gula Pasir 1kg", "harga": 17500},
+    "BRG04": {"nama": "Indomie Goreng", "harga": 3100},
+    "BRG05": {"nama": "Telur Ayam 1kg", "harga": 28000},
+    "BRG06": {"nama": "Kopi Kapal Api", "harga": 15000},
+    "BRG07": {"nama": "Teh Celup Sariwangi", "harga": 8500},
+    "BRG08": {"nama": "Air Mineral 600ml", "harga": 4000}
+}
+
+# Penyimpanan sementara untuk keranjang belanja
+keranjang = []
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    kembalian = None
+    uang_bayar = 0
+    pesan_error = None
+    
+    # Hitung total harga di keranjang
+    total_harga = sum(item["subtotal"] for item in keranjang)
+
+    if request.method == "POST":
+        aksi = request.form.get("aksi")
+
+        # 1. Tambah barang ke keranjang
+        if aksi == "tambah":
+            kode = request.form.get("kode_produk")
+            jumlah = int(request.form.get("jumlah", 1))
+            
+            if kode in produk_minimarket and jumlah > 0:
+                barang = produk_minimarket[kode]
+                
+                # Cek jika barang sudah ada di keranjang, tambahkan jumlahnya saja
+                ditemukan = False
+                for item in keranjang:
+                    if item["kode"] == kode:
+                        item["jumlah"] += jumlah
+                        item["subtotal"] = item["jumlah"] * item["harga"]
+                        ditemukan = True
+                        break
+                
+                if not ditemukan:
+                    keranjang.append({
+                        "kode": kode,
+                        "nama": barang["nama"],
+                        "harga": barang["harga"],
+                        "jumlah": jumlah,
+                        "subtotal": barang["harga"] * jumlah
+                    })
+            return redirect(url_for("index"))
+
+        # 2. Proses pembayaran
+        elif aksi == "bayar":
+            uang_bayar = int(request.form.get("uang_bayar", 0))
+            if uang_bayar < total_harga:
+                pesan_error = "Uang pembayaran kurang dari total belanja!"
+            else:
+                kembalian = uang_bayar - total_harga
+
+        # 3. Reset / Transaksi Baru
+        elif aksi == "reset":
+            keranjang.clear()
+            return redirect(url_for("index"))
+
+    return render_template(
+        "index.html",
+        produk=produk_minimarket,
+        keranjang=keranjang,
+        total_harga=total_harga,
+        uang_bayar=uang_bayar,
+        kembalian=kembalian,
+        pesan_error=pesan_error
+    )
+
+@app.route("/hapus/<kode>")
+def hapus_item(kode):
+    global keranjang
+    keranjang = [item for item in keranjang if item["kode"] != kode]
+    return redirect(url_for("index"))
+
+if __name__ == "__main__":
+    app.run(debug=True)

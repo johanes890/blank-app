@@ -40,7 +40,7 @@ st.data_editor(
             width="medium",
             required=True,
         )
-    },
+    },)
     hide_index=True,
     num_rows="dynamic",
     (

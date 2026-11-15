@@ -10,3 +10,11 @@ with st.spinner("Inflating balloons..."):
     time.sleep(5)
 silahkan_masuk()
 st.button("silahkan pulang", help="Full rerun")
+if
+st.iframe(
+    '''
+    <style>body { font-family: sans-serif; padding: 1rem; }</style>
+    <p>This is <strong>embedded HTML</strong>.</p>
+    ''',
+    height=100,
+)

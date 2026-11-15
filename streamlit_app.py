@@ -43,4 +43,14 @@ st.data_editor(
     },
     hide_index=True,
     num_rows="dynamic",
+    DataFrame(
+    {
+        "widgets": [
+            "st.selectbox",
+            "st.number_input",
+            "st.text_area",
+            "st.button",
+        ],
+    }
+)
 )

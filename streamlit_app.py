@@ -41,8 +41,7 @@ st.data_editor(
             required=True,
         )
     },)
-    hide_index=True,
-    num_rows="dynamic",
+    
     (
     {
         "widgets": [

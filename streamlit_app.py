@@ -20,7 +20,7 @@ st.iframe(
 import pandas as pd
 import streamlit as st
 
-data_df = pd.DataFrame(
+DataFrame(
     {
         "widgets": [
             "st.selectbox",
@@ -30,26 +30,3 @@ data_df = pd.DataFrame(
         ],
     }
 )
-
-st.data_editor
-    data_df,
-    column_config={
-        "widgets": st.column_config.Column(
-            "Streamlit Widgets",
-            help="Streamlit **widget** commands 🎈",
-            width="medium",
-            required=True,
-        )
-    },)
-    
-    
-    {
-        "widgets": [
-            "ikan besar",
-            "ikan kecil",
-            "ikan salto",
-            "ikan hiu mterbang terbang",
-        ],
-    }
-)
-
